@@ -1,9 +1,9 @@
 
 const TableComponent = () => {
     return (
-        <main>
+        <div>
             <p> this is the table </p>
-        </main>
+        </div>
     );
 }
 

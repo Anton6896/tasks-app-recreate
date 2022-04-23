@@ -1,4 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 import NavbarComponent from "./components/NavbarComponent";
 import FilterComponent from "./components/FilterComponent";
 import TableComponent from "./components/TableComponent";
