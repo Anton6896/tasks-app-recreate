@@ -1,10 +1,18 @@
-
+import {Row, Col} from "react-bootstrap";
 
 const FilterComponent = () => {
+    // todo move data to right side
     return (
-        <main>
-            <p> i am filter  </p>
-        </main>
+        <filter>
+            <Row>
+                <Col>
+                    <p>left data </p>
+                </Col>
+                <Col className={""}>
+                    <p className={""}>some data</p>
+                </Col>
+            </Row>
+        </filter>
     );
 }
 
