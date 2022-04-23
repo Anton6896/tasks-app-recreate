@@ -13,3 +13,5 @@
 ---
 #### Using 
 - https://react-bootstrap.github.io/components/alerts
+- https://www.youtube.com/watch?v=bbkBuqC1rU4
+- https://github.dev/john-smilga/redux-toolkit-tutorial/blob/main/final/src/store.js
