@@ -1,10 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
 import NavbarComponent from "./components/NavbarComponent";
 import FilterComponent from "./components/FilterComponent";
 import TableComponent from "./components/TableComponent";
 import {Container} from "react-bootstrap";
+
+// todo pre load data
 
 const App = () => {
     return (
@@ -14,7 +14,6 @@ const App = () => {
                 <FilterComponent/>
                 <TableComponent/>
             </Container>
-
         </main>
     );
 }
