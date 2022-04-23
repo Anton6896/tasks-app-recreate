@@ -1,0 +1,11 @@
+/* shared style */
+.navTextStyle {
+    padding-right: 0.5rem;
+    display: block;
+    font-family: var(--bs-body-font-family);
+    font-size: var(--bs-body-font-size);
+    font-weight: var(--bs-body-font-weight);
+    line-height: var(--bs-body-line-height);
+    margin: 8px 0 0 0 !important;
+}
+
