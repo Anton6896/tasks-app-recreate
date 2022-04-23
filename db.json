@@ -1,5 +1,8 @@
 {
-  "/api/internal/projects/project/template/?withSettings=true&status=publish&page_size=5000": {
+  "test": {
+    "msg": "ok"
+  },
+  "api_template_withSettings_true": {
     "meta": {
       "links": {
         "next": null,
@@ -492,7 +495,7 @@
       }
     ]
   },
-  "/api/internal/projects/project/transactions_board/?with_template=true&assignee=anton&with_strudel=true&show_alive=true&page_size=200": {
+  "api_transactions_board": {
     "meta": {
       "links": {
         "next": null,
@@ -558,7 +561,7 @@
       }
     ]
   },
-  "/api/internal/me?project=project": {
+  "api_me": {
     "data": {
       "id": 3,
       "username": "anton",
