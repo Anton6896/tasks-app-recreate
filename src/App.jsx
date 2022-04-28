@@ -5,26 +5,27 @@ import TableComponent from "./components/TableComponent";
 import {Container, Alert} from "react-bootstrap";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {loadData, setError} from "./state/features/tasksSlice";
+import {loadData, setAlert} from "./state/features/tasksSlice";
 import {useQuery} from "react-query";
 import {dataLoader} from "./calls";
 
 const App = () => {
     const dispatch = useDispatch()
     const {alerts} = useSelector((state) => state.tasks)
-    const {isLoading, data, isError, error} = useQuery('dataLoader', dataLoader)
+    const {isLoading, resData, isError, error} = useQuery('dataLoader', dataLoader)
+
+    useEffect(() => {
+        if (resData) {
+            dispatch(loadData(resData))
+        }
+    }, [resData])
 
     useEffect(() => {
         if (isError) {
-            let data = {type: 'danger', text: error.message}
-            dispatch(setError(data))
-            return
+            let err = {type: 'danger', text: error.message}
+            dispatch(setAlert(err))
         }
-
-        if (data) {
-            dispatch(loadData(data))
-        }
-    }, [data])
+    }, [isError])
 
     return (
         <main>

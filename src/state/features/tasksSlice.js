@@ -16,10 +16,8 @@ const tasksSlice = createSlice({
                 state.meta = action.payload.meta
             }
         },
-        setError: (state, action) => {
+        setAlert: (state, action) => {
             // set alert string
-            console.log(action.payload)
-
             state.alerts = action.payload
 
             setTimeout(()=>{
@@ -29,5 +27,5 @@ const tasksSlice = createSlice({
     }
 })
 
-export const {loadData, setError} = tasksSlice.actions
+export const {loadData, setAlert} = tasksSlice.actions
 export default tasksSlice.reducer
