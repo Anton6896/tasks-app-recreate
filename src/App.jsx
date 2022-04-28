@@ -12,13 +12,13 @@ import {dataLoader} from "./calls";
 const App = () => {
     const dispatch = useDispatch()
     const {alerts} = useSelector((state) => state.tasks)
-    const {isLoading, resData, isError, error} = useQuery('dataLoader', dataLoader)
+    const {isLoading, data, isError, error} = useQuery('dataLoader', dataLoader)
 
     useEffect(() => {
-        if (resData) {
-            dispatch(loadData(resData))
+        if (data) {
+            dispatch(loadData(data.data))
         }
-    }, [resData])
+    }, [data])
 
     useEffect(() => {
         if (isError) {

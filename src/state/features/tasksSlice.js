@@ -1,9 +1,9 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 
 const initialState = {
     data: [],
     meta: {},
-    alerts: {type:'', text:''},
+    alerts: {type: '', text: ''},
 }
 
 const tasksSlice = createSlice({
@@ -11,18 +11,15 @@ const tasksSlice = createSlice({
     initialState,
     reducers: {
         loadData: (state, action) => {
+            console.log(action.payload)
             if (Object.keys(action.payload).length > 0) {
                 state.data = action.payload.data
                 state.meta = action.payload.meta
             }
         },
         setAlert: (state, action) => {
-            // set alert string
+            console.log(action.payload)
             state.alerts = action.payload
-
-            setTimeout(()=>{
-                state.alerts = ''
-            }, 3000)
         }
     }
 })
