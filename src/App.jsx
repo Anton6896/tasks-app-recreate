@@ -5,7 +5,7 @@ import TableComponent from "./components/TableComponent";
 import {Container, Alert} from "react-bootstrap";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {createAlert, loadData, setAlert} from "./state/features/tasksSlice";
+import {createAlert, loadData} from "./state/features/tasksSlice";
 import {useQuery} from "react-query";
 import {dataLoader} from "./calls";
 
@@ -22,8 +22,7 @@ const App = () => {
 
     useEffect(() => {
         if (isError) {
-            let err = {type: 'danger', text: error.message}
-            dispatch(createAlert(err))
+            dispatch(createAlert({type: 'danger', text: error.message}))
         }
     }, [isError])
 

@@ -39,9 +39,13 @@ const tasksSlice = createSlice({
         },
         [createAlert.fulfilled]: (state) => {
             state.alerts = {type: '', text: ''}
-        }
-    }
+        },
+        [createAlert.rejected]: (state) => {
+            // nothing to reject here
+        },
+
+    },
 })
 
-export const {loadData, setAlert} = tasksSlice.actions
+export const {loadData,} = tasksSlice.actions
 export default tasksSlice.reducer
