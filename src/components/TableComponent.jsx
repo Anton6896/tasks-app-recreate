@@ -4,10 +4,11 @@ import {useQuery} from "react-query";
 import {dataLoader} from "../calls";
 import {useEffect} from "react";
 import {createAlert, loadData} from "../state/features/tasksSlice";
+import LoadingComponent from "./LoadingComponent";
 
 const TableComponent = () => {
     const dispatch = useDispatch()
-    const {tasksList, } = useSelector((state) => state.tasks)
+    const {tasksList,} = useSelector((state) => state.tasks)
 
     const {isLoading, data, isError, error} = useQuery(
         'dataLoader',
@@ -25,8 +26,6 @@ const TableComponent = () => {
             dispatch(createAlert({type: 'danger', text: error.message}))
         }
     }, [isError])
-
-
 
     const showList = () => {
         return (
@@ -56,7 +55,10 @@ const TableComponent = () => {
     return (
         <Container style={{marginTop: '10px'}}>
             <ListGroup as="ol">
-                {tasksList && showList()}
+                {
+                    isLoading ? (<LoadingComponent/>) :
+                        (tasksList && showList())
+                }
             </ListGroup>
         </Container>
     );
