@@ -10,22 +10,22 @@ const TableComponent = () => {
     const dispatch = useDispatch()
     const {tasksList,} = useSelector((state) => state.tasks)
 
+    const onLoadData = (data) => {
+        dispatch(loadData(data.data))
+    }
+
+    const onErrorData = (error) => {
+        dispatch(createAlert({type: 'danger', text: error.message}))
+    }
+
     const {isLoading, data, isError, error} = useQuery(
         'dataLoader',
-        dataLoader
+        dataLoader,
+        {
+            onSuccess: onLoadData,
+            onError: onErrorData,
+        }
     )
-
-    useEffect(() => {
-        if (data) {
-            dispatch(loadData(data.data))
-        }
-    }, [data])
-
-    useEffect(() => {
-        if (isError) {
-            dispatch(createAlert({type: 'danger', text: error.message}))
-        }
-    }, [isError])
 
     const showList = () => {
         return (
@@ -56,8 +56,7 @@ const TableComponent = () => {
         <Container style={{marginTop: '10px'}}>
             <ListGroup as="ol">
                 {
-                    isLoading ? (<LoadingComponent/>) :
-                        (tasksList && showList())
+                    isLoading ? (<LoadingComponent/>) : (tasksList && showList())
                 }
             </ListGroup>
         </Container>
