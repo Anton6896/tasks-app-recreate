@@ -10,7 +10,7 @@ export const createAlert = createAsyncThunk('alert-creator', (data) => {
 })
 
 const initialState = {
-    data: [],
+    tasksList: [],
     meta: {},
     alerts: {type: '', text: ''},
 }
@@ -21,12 +21,9 @@ const tasksSlice = createSlice({
     reducers: {
         loadData: (state, {payload}) => {
             if (Object.keys(payload).length > 0) {
-                state.data = payload.data
+                state.tasksList = payload.data
                 state.meta = payload.meta
             }
-        },
-        setAlert: (state, {payload}) => {
-            state.alerts = payload
         },
         removeTask: (state, {payload}) => {
             state.data = state.data.filter((task) => task.id !== payload.id)

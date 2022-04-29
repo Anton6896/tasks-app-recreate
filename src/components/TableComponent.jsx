@@ -1,19 +1,42 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Container, ListGroup, ButtonGroup, Button, Row, Col} from "react-bootstrap";
-
+import {useQuery} from "react-query";
+import {dataLoader} from "../calls";
+import {useEffect} from "react";
+import {createAlert, loadData} from "../state/features/tasksSlice";
 
 const TableComponent = () => {
-    const {data} = useSelector((state) => state.tasks)
+    const dispatch = useDispatch()
+    const {tasksList, } = useSelector((state) => state.tasks)
+
+    const {isLoading, data, isError, error} = useQuery(
+        'dataLoader',
+        dataLoader
+    )
+
+    useEffect(() => {
+        if (data) {
+            dispatch(loadData(data.data))
+        }
+    }, [data])
+
+    useEffect(() => {
+        if (isError) {
+            dispatch(createAlert({type: 'danger', text: error.message}))
+        }
+    }, [isError])
+
+
 
     const showList = () => {
         return (
-            data.map((task => (
+            tasksList.map((task => (
                 <ListGroup.Item as="li" key={task.id}>
                     <Row style={{textAlign: 'right'}}>
                         <Col xs lg md={3} className={''}>
                             <ButtonGroup className={'float-start'} aria-label="send | delete">
-                                <Button variant="secondary">delete</Button>
-                                <Button variant="secondary">open</Button>
+                                <Button variant="outline-secondary">delete</Button>
+                                <Button variant="outline-secondary">open</Button>
                             </ButtonGroup>
                         </Col>
 
@@ -33,7 +56,7 @@ const TableComponent = () => {
     return (
         <Container style={{marginTop: '10px'}}>
             <ListGroup as="ol">
-                {data && showList()}
+                {tasksList && showList()}
             </ListGroup>
         </Container>
     );
