@@ -5,7 +5,7 @@ import TableComponent from "./components/TableComponent";
 import {Container, Alert} from "react-bootstrap";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {loadData, setAlert} from "./state/features/tasksSlice";
+import {createAlert, loadData, setAlert} from "./state/features/tasksSlice";
 import {useQuery} from "react-query";
 import {dataLoader} from "./calls";
 
@@ -23,18 +23,16 @@ const App = () => {
     useEffect(() => {
         if (isError) {
             let err = {type: 'danger', text: error.message}
-            dispatch(setAlert(err))
+            dispatch(createAlert(err))
         }
     }, [isError])
+
 
     return (
         <main>
             <NavbarComponent/>
             {
-                isLoading ?
-                    <div>
-                        <p> loading ... </p>
-                    </div> :
+                isLoading ? <div><p> loading ... </p></div> :
                     <Container>
                         {alerts.text && <Alert variant={alerts.type}>{alerts.text}</Alert>}
                         <FilterComponent/>

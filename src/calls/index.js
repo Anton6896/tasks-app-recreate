@@ -7,3 +7,7 @@ export const dataLoader = async () => {
     }
     return axios(opt);
 }
+
+export const removeTask = async () => {
+
+}

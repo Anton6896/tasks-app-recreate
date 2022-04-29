@@ -1,5 +1,14 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 
+export const createAlert = createAsyncThunk('alert-creator', (data) => {
+    return new Promise((resolve, reject) => {
+        console.log(data)
+        setTimeout(function () {
+            resolve('timeout_done')
+        }, 4000);
+    });
+})
+
 const initialState = {
     data: [],
     meta: {},
@@ -7,19 +16,29 @@ const initialState = {
 }
 
 const tasksSlice = createSlice({
-    name: ' ',
+    name: 'tasks',
     initialState,
     reducers: {
-        loadData: (state, action) => {
-            console.log(action.payload)
-            if (Object.keys(action.payload).length > 0) {
-                state.data = action.payload.data
-                state.meta = action.payload.meta
+        loadData: (state, {payload}) => {
+            if (Object.keys(payload).length > 0) {
+                state.data = payload.data
+                state.meta = payload.meta
             }
         },
-        setAlert: (state, action) => {
-            console.log(action.payload)
-            state.alerts = action.payload
+        setAlert: (state, {payload}) => {
+            state.alerts = payload
+        },
+        removeTask: (state, {payload}) => {
+            state.data = state.data.filter((task) => task.id !== payload.id)
+            // todo send async remove task
+        }
+    },
+    extraReducers: {
+        [createAlert.pending]: (state, action) => {
+            state.alerts = action.meta.arg
+        },
+        [createAlert.fulfilled]: (state) => {
+            state.alerts = {type: '', text: ''}
         }
     }
 })

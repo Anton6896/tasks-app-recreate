@@ -14,5 +14,6 @@
 #### Using 
 - bootstrap: https://react-bootstrap.github.io/components/alerts
 - react reducx toolkit : https://www.youtube.com/watch?v=bbkBuqC1rU4
-- https://github.dev/john-smilga/redux-toolkit-tutorial/blob/main/final/src/store.js
+  - https://github.dev/john-smilga/redux-toolkit-tutorial/blob/main/final/src/store.js
 - react query :  https://www.youtube.com/watch?v=Q12EVU8YpTY
+- axious https://axios-http.com/docs/intro
