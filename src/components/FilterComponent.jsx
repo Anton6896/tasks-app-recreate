@@ -17,9 +17,9 @@ const FilterComponent = () => {
                 </Col>
                 <Col md={8}>
                     <ButtonGroup aria-label="Basic example" className="float-end">
-                        <Button variant="outline-secondary">Left</Button>
-                        <Button variant="outline-secondary">Middle</Button>
-                        <Button variant="outline-secondary">Right</Button>
+                        <Button variant="outline-secondary">yesterday</Button>
+                        <Button variant="outline-secondary">today</Button>
+                        <Button variant="outline-secondary">tomorrow</Button>
                     </ButtonGroup>
                 </Col>
             </Row>
