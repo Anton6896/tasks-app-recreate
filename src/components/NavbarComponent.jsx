@@ -1,6 +1,11 @@
 import {Container, Navbar, Nav, NavDropdown} from "react-bootstrap";
+import {useDispatch, useSelector} from "react-redux";
 
 const NavbarComponent = () => {
+    const dispatch = useDispatch()
+    const {withSettingsTaskList,} = useSelector((state) => state.tasks)
+
+    //load data
 
     // ech drop dawn must be connected to open new data
     const showDropdownLinks = () => {
@@ -16,15 +21,12 @@ const NavbarComponent = () => {
 
     }
 
-
     return (
         <Navbar bg="light" expand="lg" fixed={'top'}>
             <Container>
-
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-
                         <NavDropdown title="OtherLinks" id="basic-nav-dropdown" style={{marginRight: "10px"}}>
                             {showDropdownLinks()}
                         </NavDropdown>

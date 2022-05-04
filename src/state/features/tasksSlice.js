@@ -11,7 +11,9 @@ export const createAlert = createAsyncThunk('alert-creator', (data) => {
 
 const initialState = {
     tasksList: [],
-    meta: {},
+    tasksListMeta: {},
+    withSettingsTaskList: [],
+    withSettingsTaskMeta: {},
     alerts: {type: '', text: ''},
 }
 
@@ -22,13 +24,19 @@ const tasksSlice = createSlice({
         loadData: (state, {payload}) => {
             if (Object.keys(payload).length > 0) {
                 state.tasksList = payload.data
-                state.meta = payload.meta
+                state.tasksListMeta = payload.meta
             }
         },
         removeTask: (state, {payload}) => {
             state.data = state.data.filter((task) => task.id !== payload.id)
             // todo send async remove task
-        }
+        },
+        setWithSettingsData: (state, {payload}) => {
+            if (Object.keys(payload).length > 0) {
+                state.withSettingsTaskList = payload.data
+                state.withSettingsTaskMeta = payload.meta
+            }
+        },
     },
     extraReducers: {
         [createAlert.pending]: (state, action) => {

@@ -10,7 +10,7 @@ const TableComponent = () => {
     const {tasksList,} = useSelector((state) => state.tasks)
 
 
-    const onLoadData = (data) => {
+    const onSuccessData = (data) => {
         dispatch(loadData(data.data))
     }
 
@@ -22,7 +22,7 @@ const TableComponent = () => {
         'dataLoader',
         dataLoader,
         {
-            onSuccess: onLoadData,
+            onSuccess: onSuccessData,
             onError: onErrorData,
         }
     )

@@ -9,7 +9,7 @@ export const dataLoader = async () => {
 }
 
 export const removeTask = async () => {
-
+    console.log('send remove data query')
 }
 
 export const findBy = async (data) => {
@@ -18,4 +18,12 @@ export const findBy = async (data) => {
         console.log('looking for ' + data)
         resolve('ok')
     });
+}
+
+export const getWithSettings = async () => {
+    const opt = {
+        method: 'GET',
+        url: '/api_template_withSettings_true'
+    }
+    return axios(opt);
 }

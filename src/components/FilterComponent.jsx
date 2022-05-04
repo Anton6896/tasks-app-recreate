@@ -32,6 +32,10 @@ const FilterComponent = () => {
         }
     )
 
+    const onDayFilterBtn = (day) => {
+
+    }
+
     return (
         <div>
             <Row style={{margin: '70px 0 0 0'}}>
@@ -40,8 +44,9 @@ const FilterComponent = () => {
                         <Button variant="outline-secondary"
                                 onClick={refetch}
                                 id="button-addon1">Search</Button>
-                        <FormControl aria-label="Example text with button addon"
-                                     placeholder="search"
+
+                        <FormControl aria-label="search for task"
+                                     placeholder="search ..."
                                      value={searchValue}
                                      onChange={(e) => {
                                          setSearchValue(e.target.value)
