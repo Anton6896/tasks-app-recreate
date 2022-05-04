@@ -11,3 +11,11 @@ export const dataLoader = async () => {
 export const removeTask = async () => {
 
 }
+
+export const findBy = async (data) => {
+    // send request for data
+    return new Promise((resolve, reject) => {
+        console.log('looking for ' + data)
+        resolve('ok')
+    });
+}
