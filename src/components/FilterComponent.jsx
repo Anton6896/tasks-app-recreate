@@ -1,10 +1,16 @@
 import {Row, Col, Button, ButtonGroup, InputGroup, FormControl} from "react-bootstrap";
+import {useQuery} from "react-query";
+import {useDispatch} from "react-redux";
 
 const FilterComponent = () => {
-    // todo move data to right side
+    const dispatch = useDispatch()
+
+
+
+
     return (
         <div>
-            <Row style={{margin: '10px 0 0 0'}}>
+            <Row style={{margin: '70px 0 0 0'}}>
                 <Col md={4}>
                     <InputGroup className="mb-3">
                         <Button variant="outline-secondary" id="button-addon1">
