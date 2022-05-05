@@ -26,7 +26,6 @@ const NavbarComponent = () => {
         }
     )
 
-
     const showDropdownLinks = () => {
         if (withSettingsTaskList) {
             console.log(withSettingsTaskList)

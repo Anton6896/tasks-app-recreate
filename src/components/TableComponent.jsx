@@ -41,21 +41,26 @@ const TableComponent = () => {
         return (
             tasksList.map((task => (
                 <ListGroup.Item as="li" key={task.id}>
-                    <Row style={{textAlign: 'right'}}>
-                        <Col xs lg md={3} className={''}>
+                    <Row>
+                        <Col lg={2} md={6} sm={6}>
                             <ButtonGroup className={'float-start'} aria-label="send | delete">
                                 <Button variant="outline-secondary" onClick={() => {onDelete(task)}}>delete</Button>
                                 <Button variant="outline-secondary" onClick={() => {onOpen(task)}}>open</Button>
                             </ButtonGroup>
                         </Col>
 
-                        <Col xs lg={3} md={4} className={'order-lg-2'}>
+                        <Col lg={3} md={6} sm={6} className={'order-lg-2'} style={{textAlign: 'right'}}>
                             <p className="fw-bold" style={{marginBottom: '1px'}}>{task.template.display_name}</p>
                             <small className={'text-muted'}>{task.expiration} בתוקף </small>
                         </Col>
-                        <Col md={'6'} className={'order-lg-1'}>
-                            <p>{task.template.description}</p>
+
+                        <Col className={'order-lg-1'} style={{textAlign: 'right'}} >
+                            {/*<p>{task.template.description}</p>*/}
+                            <p>לורם איפסום הוא כינוי לטקסט חסר משמעות לחלוטין
+                                - הנקרא לפעמים גם דמי טקסט או
+                                ג'יבריש - ומיועד להיות ממוקם בסקיצות עיצוביות</p>
                         </Col>
+
                     </Row>
                 </ListGroup.Item>
             )))
