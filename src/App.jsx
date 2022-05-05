@@ -4,6 +4,7 @@ import FilterComponent from "./components/FilterComponent";
 import TableComponent from "./components/TableComponent";
 import {Container, Alert} from "react-bootstrap";
 import {useSelector} from "react-redux";
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
 const alertStyle = {
     position: 'absolute',
@@ -14,15 +15,25 @@ const alertStyle = {
 const App = () => {
     const {alerts} = useSelector((state) => state.tasks)
 
+    const tasksBody = () => {
+        return (
+            <main>
+                <NavbarComponent/>
+                <Container>
+                    {alerts.text && <Alert style={alertStyle} variant={alerts.type}>{alerts.text}</Alert>}
+                    <FilterComponent/>
+                    <TableComponent/>
+                </Container>
+            </main>
+        )
+    }
+
     return (
-        <main>
-            <NavbarComponent/>
-            <Container>
-                {alerts.text && <Alert style={alertStyle} variant={alerts.type}>{alerts.text}</Alert>}
-                <FilterComponent/>
-                <TableComponent/>
-            </Container>
-        </main>
+        <Router>
+            <Routes>
+                <Route path={'/:projectName/tasks'} element={tasksBody()}/>
+            </Routes>
+        </Router>
     );
 }
 

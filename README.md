@@ -19,3 +19,6 @@
 - axious https://axios-http.com/docs/intro
 
 !! check an n ui design !! <- koby >>> https://mui.com/
+
+---
+handle csrf request : https://www.techiediaries.com/django-react-forms-csrf-axios/

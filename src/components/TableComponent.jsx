@@ -42,6 +42,14 @@ const TableComponent = () => {
     }
 
     const showList = () => {
+        let totalTasksAmount = tasksList?.length
+
+        if (totalTasksAmount === 0) {
+            return <ListGroup.Item as="li" style={{textAlign: 'center'}}>
+                <p>Have no data to show .</p>
+            </ListGroup.Item>
+        }
+
         return (
             tasksList.map((task => (
                 <ListGroup.Item as="li" key={task.id}>
@@ -74,11 +82,6 @@ const TableComponent = () => {
             )))
         )
     }
-
-    /*
-    * <DeleteModal task={task} showModalSwitch={showModalSwitch} showModal={showModal}/>
-    *
-    * */
 
     return (
         <Container style={{marginTop: '10px'}}>

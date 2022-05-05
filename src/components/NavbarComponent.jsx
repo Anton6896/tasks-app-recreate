@@ -3,12 +3,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {createAlert, setWithSettingsData} from "../state/features/tasksSlice";
 import {useQuery} from "react-query";
 import {getWithSettings} from "../calls";
+import { useParams } from "react-router-dom";
+
 
 const NavbarComponent = () => {
     const dispatch = useDispatch()
     const {withSettingsTaskList,} = useSelector((state) => state.tasks)
+    let { projectName } = useParams();
 
-    //load data
     const onSuccessData = (data) => {
         dispatch(setWithSettingsData(data.data))
     }
@@ -26,12 +28,19 @@ const NavbarComponent = () => {
         }
     )
 
+    const onSsessionCreate = (item) => {
+        console.log(item)
+        console.log(projectName)
+    }
+
     const showDropdownLinks = () => {
         if (withSettingsTaskList) {
-            console.log(withSettingsTaskList)
             return withSettingsTaskList.map(itemLink => (
                 <NavDropdown.Item key={itemLink.template_id}
-                                  href="#">
+                                  href="#"
+                                  onClick={() => {
+                                      onSsessionCreate(itemLink)
+                                  }}>
                     {itemLink.display_name}
                 </NavDropdown.Item>
             ))
