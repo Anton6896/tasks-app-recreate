@@ -52,5 +52,5 @@ const tasksSlice = createSlice({
     },
 })
 
-export const {loadData,} = tasksSlice.actions
+export const {loadData,setWithSettingsData} = tasksSlice.actions
 export default tasksSlice.reducer

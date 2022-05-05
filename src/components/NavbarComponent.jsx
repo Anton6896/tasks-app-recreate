@@ -1,24 +1,45 @@
 import {Container, Navbar, Nav, NavDropdown} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
+import {createAlert, setWithSettingsData} from "../state/features/tasksSlice";
+import {useQuery} from "react-query";
+import {getWithSettings} from "../calls";
 
 const NavbarComponent = () => {
     const dispatch = useDispatch()
     const {withSettingsTaskList,} = useSelector((state) => state.tasks)
 
     //load data
+    const onSuccessData = (data) => {
+        dispatch(setWithSettingsData(data.data))
+    }
 
-    // ech drop dawn must be connected to open new data
+    const onErrorData = (error) => {
+        dispatch(createAlert({type: 'danger', text: error.message}))
+    }
+
+    useQuery(
+        'dataWithSettings',
+        getWithSettings,
+        {
+            onSuccess: onSuccessData,
+            onError: onErrorData,
+        }
+    )
+
+
     const showDropdownLinks = () => {
-        return (
-            <div>
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider/>
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-            </div>
-        )
+        if (withSettingsTaskList) {
+            console.log(withSettingsTaskList)
+            return withSettingsTaskList.map(itemLink => (
+                <NavDropdown.Item key={itemLink.template_id}
+                                  href="#">
+                    {itemLink.display_name}
+                </NavDropdown.Item>
+            ))
 
+        } else {
+            return <NavDropdown.Item disabled>No active templates</NavDropdown.Item>
+        }
     }
 
     return (

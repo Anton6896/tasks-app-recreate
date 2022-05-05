@@ -18,7 +18,7 @@ const TableComponent = () => {
         dispatch(createAlert({type: 'danger', text: error.message}))
     }
 
-    const {isLoading, data, isError, error} = useQuery(
+    const {isLoading} = useQuery(
         'dataLoader',
         dataLoader,
         {
