@@ -12,7 +12,9 @@ const NavbarComponent = () => {
     let {projectName} = useParams();
 
     const onSuccessData = (data) => {
-        dispatch(setWithSettingsData(data.data))
+        if (data) {
+            dispatch(setWithSettingsData(data.data))
+        }
     }
 
     const onErrorData = (error) => {

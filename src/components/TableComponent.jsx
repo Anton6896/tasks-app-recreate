@@ -16,7 +16,9 @@ const TableComponent = () => {
     let { projectName } = useParams();
 
     const onSuccessData = (data) => {
-        dispatch(loadData(data.data))
+        if (data){
+            dispatch(loadData(data.data))
+        }
     }
 
     const onErrorData = (error) => {
