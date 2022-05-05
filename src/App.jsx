@@ -59,7 +59,6 @@ const App = () => {
         }
     )
 
-
     useEffect(() => {
         getMe(projectName)
             .then(data => {
@@ -68,21 +67,16 @@ const App = () => {
             })
     }, [])
 
-    const tasksBody = () => {
-        return (
-            <main>
-                <NavbarComponent/>
-                <Container>
-                    {alerts.text && <Alert style={alertStyle} variant={alerts.type}>{alerts.text}</Alert>}
-                    <FilterComponent/>
-                    {tableLoading ? <LoadingComponent/> : <TableComponent/>}
-                </Container>
-            </main>
-        )
-    }
-
-    return tasksBody();
-
+    return (
+        <main>
+            <NavbarComponent/>
+            <Container>
+                {alerts.text && <Alert style={alertStyle} variant={alerts.type}>{alerts.text}</Alert>}
+                <FilterComponent/>
+                {tableLoading ? <LoadingComponent/> : <TableComponent/>}
+            </Container>
+        </main>
+    )
 }
 
 export default App;
