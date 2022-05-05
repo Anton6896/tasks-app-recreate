@@ -10,24 +10,21 @@ const FilterComponent = () => {
     const {tasksList,} = useSelector((state) => state.tasks)
     const [searchValue, setSearchValue] = useState('')
 
-    const onSuccessData = (data) => {
-        console.log(data)
-        // dispatch(loadData(data.data))
-        setSearchValue('')
-    }
 
-    const onErrorData = (error) => {
-        dispatch(createAlert({type: 'danger', text: error.message}))
-    }
-
-    const {isLoading, data, isError, error, refetch} = useQuery(
+    const {data: filterData, error: filterError, refetch} = useQuery(
         ['get-by-text', searchValue],
         () => {
             return findBy(searchValue)
         },
         {
-            onSuccess: onSuccessData,
-            onError: onErrorData,
+            onSuccess: () => {
+                console.log(filterData)
+                // dispatch(loadData(data.data))
+                setSearchValue('')
+            },
+            onError: () => {
+                dispatch(createAlert({type: 'danger', text: filterError.message}))
+            },
             enabled: false
         }
     )

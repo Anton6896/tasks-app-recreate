@@ -1,8 +1,5 @@
 import {Container, Navbar, Nav, NavDropdown} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {createAlert, setWithSettingsData} from "../state/features/tasksSlice";
-import {useQuery} from "react-query";
-import {getWithSettings} from "../calls";
 import {useParams} from "react-router-dom";
 
 
@@ -10,27 +7,6 @@ const NavbarComponent = () => {
     const dispatch = useDispatch()
     const {withSettingsTaskList,} = useSelector((state) => state.tasks)
     let {projectName} = useParams();
-
-    const onSuccessData = (data) => {
-        if (data) {
-            dispatch(setWithSettingsData(data.data))
-        }
-    }
-
-    const onErrorData = (error) => {
-        dispatch(createAlert({type: 'danger', text: error.message}))
-    }
-
-    useQuery(
-        'dataWithSettings',
-        () => {
-            getWithSettings(projectName)
-        },
-        {
-            onSuccess: onSuccessData,
-            onError: onErrorData,
-        }
-    )
 
     const onSsessionCreate = (item) => {
         console.log(item)

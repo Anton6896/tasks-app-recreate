@@ -1,38 +1,13 @@
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {Container, ListGroup, ButtonGroup, Button, Row, Col} from "react-bootstrap";
-import {useQuery} from "react-query";
-import {dataLoader} from "../calls";
-import {createAlert, loadData} from "../state/features/tasksSlice";
-import LoadingComponent from "./LoadingComponent";
 import {useState} from "react";
 import DeleteModal from "./DeleteMotalComponent";
-import { useParams } from "react-router-dom";
 
 const TableComponent = () => {
-    const dispatch = useDispatch()
     const {tasksList,} = useSelector((state) => state.tasks)
     const [showModal, setShowModal] = useState(false);
     const [selectedTask, setSelectedTask] = useState({});
-    let { projectName } = useParams();
 
-    const onSuccessData = (data) => {
-        if (data){
-            dispatch(loadData(data.data))
-        }
-    }
-
-    const onErrorData = (error) => {
-        dispatch(createAlert({type: 'danger', text: error.message}))
-    }
-
-    const {isLoading} = useQuery(
-        'dataLoader',
-        ()=>{dataLoader(projectName)},
-        {
-            onSuccess: onSuccessData,
-            onError: onErrorData,
-        }
-    )
 
     const showModalSwitch = (task) => {
         let show = !showModal
@@ -91,7 +66,7 @@ const TableComponent = () => {
         <Container style={{marginTop: '10px'}}>
             <ListGroup as="ol">
                 {
-                    isLoading ? (<LoadingComponent/>) : (tasksList && showList())
+                    tasksList && showList()
                 }
                 {
                     showModal && <DeleteModal showModalSwitch={showModalSwitch}

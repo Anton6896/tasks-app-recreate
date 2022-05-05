@@ -15,6 +15,7 @@ const initialState = {
     withSettingsTaskList: [],
     withSettingsTaskMeta: {},
     alerts: {type: '', text: ''},
+    isLoading: false
 }
 
 const tasksSlice = createSlice({
