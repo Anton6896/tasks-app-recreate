@@ -3,10 +3,17 @@ import axios from "axios";
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
-export const dataLoader = async () => {
+/*
+*
+Request URL: http://127.0.0.1:8015/api/internal/projects/project/template/?withSettings=true&status=publish&page_size=5000
+
+* */
+
+export const dataLoader = async (projectName) => {
     const opt = {
         method: 'GET',
-        url: '/api_transactions_board'
+        url: `/api/internal/projects/${projectName}/transactions_board/?with_template=true&assignee=anton&with_strudel=true&show_alive=true&page_size=200`
+         // url: '/api_transactions_board'
     }
     return axios(opt);
 }
@@ -23,10 +30,11 @@ export const findBy = async (data) => {
     });
 }
 
-export const getWithSettings = async () => {
+export const getWithSettings = async (projectName) => {
     const opt = {
         method: 'GET',
-        url: '/api_template_withSettings_true'
+        url: `/api/internal/projects/${projectName}/template/?withSettings=true&status=publish&page_size=5000`
+        // url: '/api_template_withSettings_true'
     }
     return axios(opt);
 }

@@ -6,12 +6,14 @@ import {createAlert, loadData} from "../state/features/tasksSlice";
 import LoadingComponent from "./LoadingComponent";
 import {useState} from "react";
 import DeleteModal from "./DeleteMotalComponent";
+import { useParams } from "react-router-dom";
 
 const TableComponent = () => {
     const dispatch = useDispatch()
     const {tasksList,} = useSelector((state) => state.tasks)
     const [showModal, setShowModal] = useState(false);
     const [selectedTask, setSelectedTask] = useState({});
+    let { projectName } = useParams();
 
     const onSuccessData = (data) => {
         dispatch(loadData(data.data))
@@ -23,7 +25,7 @@ const TableComponent = () => {
 
     const {isLoading} = useQuery(
         'dataLoader',
-        dataLoader,
+        ()=>{dataLoader(projectName)},
         {
             onSuccess: onSuccessData,
             onError: onErrorData,

@@ -22,3 +22,9 @@
 
 ---
 handle csrf request : https://www.techiediaries.com/django-react-forms-csrf-axios/
+
+
+---
+### Notes
+
+"proxy": "http://localhost:3004"
