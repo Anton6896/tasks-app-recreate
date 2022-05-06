@@ -1,6 +1,6 @@
 import {useQuery} from "react-query";
 import {createAlert, loadData, setWithSettingsData} from "../state/features/tasksSlice";
-import {dataLoader, getMe, getWithSettings} from "./index";
+import {dataLoader, findBy, getMe, getWithSettings} from "./index";
 
 export const useTableLoader = (dispatch, projectName) => {
     return useQuery(
@@ -60,6 +60,25 @@ export const useUserGetter = ({projectName, tableFetch, activeFetch}) => {
                     window.location.replace(`/login?next=${window.location.pathname}`);
                 }
             }
+        }
+    )
+}
+
+export const useSearchData = ({searchValue, setSearchValue, dispatch}) => {
+    return useQuery(
+        ['getByText', searchValue],
+        () => {
+            return findBy(searchValue)
+        },
+        {
+            onSuccess: (data) => {
+                console.log(data)
+                setSearchValue('')
+            },
+            onError: (error) => {
+                dispatch(createAlert({type: 'danger', text: error.message}))
+            },
+            enabled: false
         }
     )
 }

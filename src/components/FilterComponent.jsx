@@ -1,31 +1,15 @@
 import {Row, Col, Button, ButtonGroup, InputGroup, FormControl} from "react-bootstrap";
-import {useQuery} from "react-query";
-import {useDispatch, useSelector} from "react-redux";
-import {createAlert, loadData} from "../state/features/tasksSlice";
-import {findBy} from "../calls";
+import {useDispatch} from "react-redux";
 import {useState} from "react";
+import {useSearchData} from "../calls/customHooks";
 
 const FilterComponent = () => {
     const dispatch = useDispatch()
-    const {tasksList,} = useSelector((state) => state.tasks)
     const [searchValue, setSearchValue] = useState('')
 
-    const {refetch} = useQuery(
-        ['getByText', searchValue],
-        () => {
-            return findBy(searchValue)
-        },
-        {
-            onSuccess: (data) => {
-                console.log(data)
-                setSearchValue('')
-            },
-            onError: (error) => {
-                dispatch(createAlert({type: 'danger', text: error.message}))
-            },
-            enabled: false
-        }
-    )
+    const {refetch} = useSearchData({
+        searchValue, setSearchValue, dispatch
+    })
 
     const onDayFilterBtn = (day) => {
 

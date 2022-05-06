@@ -6,7 +6,7 @@ import {Container, Alert} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import LoadingComponent from "./components/LoadingComponent";
-import {useActiveTemplates, useTableLoader, useUserGetter} from "./calls/customHoocks";
+import {useActiveTemplates, useTableLoader, useUserGetter} from "./calls/customHooks";
 
 
 const alertStyle = {
@@ -20,6 +20,7 @@ const App = () => {
     const {alerts} = useSelector((state) => state.tasks)
     let {projectName} = useParams();
 
+    // preload data an log in user
     const {refetch: activeFetch} = useActiveTemplates(dispatch, projectName)
     const {isLoading: tableLoading, refetch: tableFetch} = useTableLoader(dispatch, projectName)
     useUserGetter({
