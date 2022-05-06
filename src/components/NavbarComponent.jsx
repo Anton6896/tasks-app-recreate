@@ -4,13 +4,12 @@ import {useParams} from "react-router-dom";
 
 
 const NavbarComponent = () => {
-    const dispatch = useDispatch()
     const {withSettingsTaskList,} = useSelector((state) => state.tasks)
+    const dispatch = useDispatch()
     let {projectName} = useParams();
 
     const onSsessionCreate = (item) => {
         console.log(item)
-        console.log(projectName)
     }
 
     const showDropdownLinks = () => {

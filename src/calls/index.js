@@ -1,7 +1,4 @@
 import axios from "axios";
-import {useQuery} from "react-query";
-import {createAlert, loadData} from "../state/features/tasksSlice";
-import {useDispatch} from "react-redux";
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
@@ -56,26 +53,3 @@ export const getMe = async (projectName) => {
 
     return axios(opt)
 }
-
-// export const  fff = async ()=>{
-//     // const dispatch = useDispatch()
-//
-//
-//     const {isLoading: tableLoading, refetch: tableFetch} = useQuery(
-//         'dataLoader',
-//         () => {
-//             return dataLoader(projectName)
-//         },
-//         {
-//             onSuccess: (tableData) => {
-//                 if (tableData) {
-//                     dispatch(loadData(tableData.data))
-//                 }
-//             },
-//             onError: (tableError) => {
-//                 dispatch(createAlert({type: 'danger', text: tableError.message}))
-//             },
-//             enabled: false
-//         }
-//     )
-// }
