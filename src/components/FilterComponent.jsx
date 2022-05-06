@@ -18,7 +18,7 @@ const FilterComponent = () => {
     return (
         <div>
             <Row style={{margin: '70px 0 0 0'}}>
-                <Col md={4}>
+                <Col md={6}>
                     <InputGroup className="mb-3">
                         <Button variant="outline-secondary"
                                 onClick={refetch}
@@ -33,7 +33,7 @@ const FilterComponent = () => {
                                      aria-describedby="basic-addon1"/>
                     </InputGroup>
                 </Col>
-                <Col md={8}>
+                <Col md={6}>
                     <ButtonGroup aria-label="Basic example" className="float-end">
                         <Button variant="outline-secondary">all</Button>
                         <Button variant="outline-secondary">today</Button>
