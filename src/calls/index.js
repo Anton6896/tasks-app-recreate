@@ -1,4 +1,7 @@
 import axios from "axios";
+import {useQuery} from "react-query";
+import {createAlert, loadData} from "../state/features/tasksSlice";
+import {useDispatch} from "react-redux";
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = 'X-CSRFToken'
@@ -52,15 +55,27 @@ export const getMe = async (projectName) => {
     }
 
     return axios(opt)
-        .then(res => {
-            return res
-        })
-        .catch(e => {
-            console.log(e)
-            if (projectName) {
-                window.location.replace(`/login/${projectName}?next=${window.location.pathname}`);
-            } else {
-                window.location.replace(`/login?next=${window.location.pathname}`);
-            }
-        })
 }
+
+// export const  fff = async ()=>{
+//     // const dispatch = useDispatch()
+//
+//
+//     const {isLoading: tableLoading, refetch: tableFetch} = useQuery(
+//         'dataLoader',
+//         () => {
+//             return dataLoader(projectName)
+//         },
+//         {
+//             onSuccess: (tableData) => {
+//                 if (tableData) {
+//                     dispatch(loadData(tableData.data))
+//                 }
+//             },
+//             onError: (tableError) => {
+//                 dispatch(createAlert({type: 'danger', text: tableError.message}))
+//             },
+//             enabled: false
+//         }
+//     )
+// }

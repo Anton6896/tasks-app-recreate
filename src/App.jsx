@@ -59,13 +59,26 @@ const App = () => {
         }
     )
 
-    useEffect(() => {
-        getMe(projectName)
-            .then(data => {
+    useQuery(
+        'userMe',
+        () => {
+            return getMe(projectName)
+        },
+        {
+            onSuccess: () => {
                 tableFetch()
                 activeFetch()
-            })
-    }, [])
+            },
+            onError: () => {
+                if (projectName) {
+                window.location.replace(`/login/${projectName}?next=${window.location.pathname}`);
+                } else {
+                    window.location.replace(`/login?next=${window.location.pathname}`);
+                }
+            }
+        }
+    )
+
 
     return (
         <main>
