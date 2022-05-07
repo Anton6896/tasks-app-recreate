@@ -34,8 +34,8 @@ export const useUpdateTableLoader = (dispatch, projectName, nextUrl) => {
                     dispatch(updateLoadedData(data.data))
                 }
             },
-            onError: (tableError) => {
-                dispatch(createAlert({type: 'danger', text: tableError.message}))
+            onError: (err) => {
+                dispatch(createAlert({type: 'danger', text: err.message}))
             },
             enabled: false
         }

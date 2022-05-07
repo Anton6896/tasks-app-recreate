@@ -1,7 +1,9 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Container, ListGroup, ButtonGroup, Button, Row, Col} from "react-bootstrap";
 import {useEffect, useRef, useState} from "react";
 import DeleteModal from "./DeleteMotalComponent";
+import {useParams} from "react-router-dom";
+import {useUpdateTableLoader} from "../calls/customHooks";
 
 function getWindowDimensions(hasWindow) {
     const width = hasWindow ? window.innerWidth : null;
@@ -13,12 +15,15 @@ function getWindowDimensions(hasWindow) {
 }
 
 const TableComponent = () => {
-    const {tasksList,} = useSelector((state) => state.tasks)
+    const {tasksList, tasksListMeta, } = useSelector((state) => state.tasks)
     const [showModal, setShowModal] = useState(false);
     const [selectedTask, setSelectedTask] = useState({});
     const listInnerRef = useRef();
     const hasWindow = typeof window !== 'undefined';
     const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions(hasWindow));
+
+    const dispatch = useDispatch()
+    let {projectName} = useParams();
 
     const showModalSwitch = (task) => {
         let show = !showModal
@@ -41,14 +46,18 @@ const TableComponent = () => {
         }
     }, [hasWindow]);
 
+    const {refetch: loadMoreTasks} = useUpdateTableLoader(dispatch, projectName, tasksListMeta?.links?.next)
+
     const onPageButton = () => { // load more tasks if exists
         if (listInnerRef.current) {
             const {scrollTop, scrollHeight, clientHeight} = listInnerRef.current;
-            if (scrollTop + clientHeight === scrollHeight) {
-                console.log('get me more data ...')
+            if (scrollTop + clientHeight === scrollHeight && tasksListMeta?.many && !!tasksListMeta.links.next) {
+                loadMoreTasks()
             }
         }
     }
+
+    //
 
     const showList = () => {
         let totalTasksAmount = tasksList?.length

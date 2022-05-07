@@ -31,8 +31,9 @@ const tasksSlice = createSlice({
             }
         },
         updateLoadedData: (state, {payload}) => {
+            console.log(payload)
             if (Object.keys(payload).length > 0) {
-                state.tasksList = [...state.tasksList, payload.data]
+                state.tasksList = [...state.tasksList, ...payload.data]
                 state.tasksListMeta = payload.meta
             }
         },
