@@ -1,13 +1,24 @@
 import {useSelector} from "react-redux";
 import {Container, ListGroup, ButtonGroup, Button, Row, Col} from "react-bootstrap";
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import DeleteModal from "./DeleteMotalComponent";
+
+function getWindowDimensions(hasWindow) {
+    const width = hasWindow ? window.innerWidth : null;
+    const height = hasWindow ? window.innerHeight : null;
+    return {
+        width,
+        height,
+    };
+}
 
 const TableComponent = () => {
     const {tasksList,} = useSelector((state) => state.tasks)
     const [showModal, setShowModal] = useState(false);
     const [selectedTask, setSelectedTask] = useState({});
-
+    const listInnerRef = useRef();
+    const hasWindow = typeof window !== 'undefined';
+    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions(hasWindow));
 
     const showModalSwitch = (task) => {
         let show = !showModal
@@ -15,9 +26,28 @@ const TableComponent = () => {
         setShowModal(show)
     }
 
-    const onOpen = (task) => {
-        // open template data in new page
+    const onOpen = (task) => { // open template data in new page
         console.log('open ' + task.id)
+    }
+
+    useEffect(() => { // watch window dimensions
+        if (hasWindow) {
+            function handleResize() {
+                setWindowDimensions(getWindowDimensions(hasWindow));
+            }
+
+            window.addEventListener('resize', handleResize);
+            return () => window.removeEventListener('resize', handleResize);
+        }
+    }, [hasWindow]);
+
+    const onPageButton = () => { // load more tasks if exists
+        if (listInnerRef.current) {
+            const {scrollTop, scrollHeight, clientHeight} = listInnerRef.current;
+            if (scrollTop + clientHeight === scrollHeight) {
+                console.log('get me more data ...')
+            }
+        }
     }
 
     const showList = () => {
@@ -50,10 +80,7 @@ const TableComponent = () => {
                         </Col>
 
                         <Col className={'order-lg-1'} style={{textAlign: 'right'}}>
-                            {/*<p>{task.template.description}</p>*/}
-                            <p>לורם איפסום הוא כינוי לטקסט חסר משמעות לחלוטין
-                                - הנקרא לפעמים גם דמי טקסט או
-                                ג'יבריש - ומיועד להיות ממוקם בסקיצות עיצוביות</p>
+                            <p>{task.template.description}</p>
                         </Col>
 
                     </Row>
@@ -64,7 +91,14 @@ const TableComponent = () => {
 
     return (
         <Container style={{marginTop: '10px'}}>
-            <ListGroup as="ol">
+            <ListGroup as="ol"
+                       ref={listInnerRef}
+                       style={{
+                           height: `${windowDimensions.height - 200}px`,
+                           overflowY: "auto",
+                           marginTop: "10px"
+                       }}
+                       onScroll={onPageButton}>
                 {
                     tasksList && showList()
                 }
