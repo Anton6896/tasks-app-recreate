@@ -1,10 +1,10 @@
 import {useQuery} from "react-query";
-import {createAlert, loadData, setWithSettingsData} from "../state/features/tasksSlice";
+import {createAlert, loadData, setWithSettingsData, updateLoadedData} from "../state/features/tasksSlice";
 import {dataLoader, findBy, getMe, getWithSettings} from "./index";
 
 export const useTableLoader = (dispatch, projectName) => {
     return useQuery(
-        'dataLoader2',
+        'dataLoader',
         () => {
             return dataLoader(projectName)
         },
@@ -12,6 +12,26 @@ export const useTableLoader = (dispatch, projectName) => {
             onSuccess: (tableData) => {
                 if (tableData) {
                     dispatch(loadData(tableData.data))
+                }
+            },
+            onError: (tableError) => {
+                dispatch(createAlert({type: 'danger', text: tableError.message}))
+            },
+            enabled: false
+        }
+    )
+}
+
+export const useUpdateTableLoader = (dispatch, projectName, nextUrl) => {
+    return useQuery(
+        'updateDataLoader',
+        () => {
+            return dataLoader(projectName, nextUrl)
+        },
+        {
+            onSuccess: (data) => {
+                if (data) {
+                    dispatch(updateLoadedData(data.data))
                 }
             },
             onError: (tableError) => {

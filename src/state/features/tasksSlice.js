@@ -30,6 +30,12 @@ const tasksSlice = createSlice({
                 state.tasksListMeta = payload.meta
             }
         },
+        updateLoadedData: (state, {payload}) => {
+            if (Object.keys(payload).length > 0) {
+                state.tasksList = [...state.tasksList, payload.data]
+                state.tasksListMeta = payload.meta
+            }
+        },
         removeTask: (state, {payload}) => {
             state.data = state.data.filter((task) => task.id !== payload.id)
             // todo send async remove task
@@ -55,5 +61,5 @@ const tasksSlice = createSlice({
     },
 })
 
-export const {loadData,setWithSettingsData} = tasksSlice.actions
+export const {loadData,setWithSettingsData, updateLoadedData} = tasksSlice.actions
 export default tasksSlice.reducer
