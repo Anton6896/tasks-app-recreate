@@ -1,6 +1,8 @@
 ## recreating tasks app 
 - goal is recreate this one http://127.0.0.1:8015/projects/tasks
 
+- build it with : https://tiangolo.medium.com/react-in-docker-with-nginx-built-with-multi-stage-docker-builds-including-testing-8cc49d6ec305
+
 ---
 ### todo 
 - [ ] fetch initial data 
