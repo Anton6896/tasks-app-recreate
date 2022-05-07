@@ -6,7 +6,7 @@ COPY ./ /app
 RUN npm run build
 
 FROM nginx:stable-alpine
-COPY --from=build-stage /app/build/ /etc/nginx/html/
+COPY --from=build-stage /app/build/ /etc/nginx/html/tasks-app/
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 

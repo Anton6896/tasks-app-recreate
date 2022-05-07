@@ -2,6 +2,7 @@
   "name": "tasks-app-recreate",
   "version": "0.1.0",
   "private": true,
+  "homepage": "tasks-app",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
     "axios": "^0.27.2",
