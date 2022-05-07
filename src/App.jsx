@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import LoadingComponent from "./components/LoadingComponent";
 import {useActiveTemplates, useTableLoader, useUserGetter} from "./calls/customHooks";
+import {useEffect} from "react";
 
 
 const alertStyle = {
@@ -23,9 +24,15 @@ const App = () => {
     // preload data an log in user
     const {refetch: activeFetch} = useActiveTemplates(dispatch, projectName)
     const {isLoading: tableLoading, refetch: tableFetch} = useTableLoader(dispatch, projectName)
-    useUserGetter({
-        tableFetch, activeFetch, projectName
-    })
+
+    useEffect(()=>{
+        tableFetch()
+        activeFetch()
+    }, [])
+
+    // useUserGetter({
+    //     tableFetch, activeFetch, projectName
+    // })
 
 
     return (
