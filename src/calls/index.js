@@ -1,14 +1,17 @@
 import axios from "axios";
 
-axios.defaults.xsrfCookieName = 'csrftoken'
-axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+// axios.defaults.xsrfCookieName = 'csrftoken'
+// axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 
 
-export const dataLoader = async (projectName) => {
+export const dataLoader = async (projectName, nextUrl=null) => {
+    let baseUrl = `http://127.0.0.1:8015/api/internal/projects/${projectName}/transactions_board/?with_template=true&assignee=anton&with_strudel=true&show_alive=true&page_size=8`
     const opt = {
-        method: 'GET',
-        // url: `/api/internal/projects/${projectName}/transactions_board/?with_template=true&assignee=anton&with_strudel=true&show_alive=true&page_size=200`
-        url: '/api_transactions_board'
+        method: 'get',
+        url: nextUrl ? nextUrl : baseUrl,
+        headers: {
+            'Authorization': 'Token 322bc98ee626b71869546c1b21be1c41b8787762'
+        }
     }
     return axios(opt);
 }
