@@ -48,7 +48,7 @@ const TableComponent = () => {
 
     const {refetch: loadMoreTasks} = useUpdateTableLoader(dispatch, projectName, tasksListMeta?.links?.next)
 
-    const onPageButton = () => { // load more tasks if exists
+    const onPageBottom = () => { // load more tasks if exists
         if (listInnerRef.current) {
             const {scrollTop, scrollHeight, clientHeight} = listInnerRef.current;
             if (scrollTop + clientHeight === scrollHeight && tasksListMeta?.many && !!tasksListMeta.links.next) {
@@ -107,7 +107,7 @@ const TableComponent = () => {
                            overflowY: "auto",
                            marginTop: "10px"
                        }}
-                       onScroll={onPageButton}>
+                       onScroll={onPageBottom}>
                 {
                     tasksList && showList()
                 }
