@@ -29,4 +29,14 @@ handle csrf request : https://www.techiediaries.com/django-react-forms-csrf-axio
 ---
 ### Notes
 
-"proxy": "http://localhost:3004"
+"proxy": "http://localhost:3004"  <<< add normal proxy in cellosign for sellosign 
+
+
+- for using with tokens 
+```
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.authentication import TokenAuthentication
+
+class TemplateViewSet(BaseViewSet):
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
+```
